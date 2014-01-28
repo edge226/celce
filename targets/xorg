@@ -15,9 +15,13 @@ CHROOTETC='xbindkeysrc.scm xserverrc-x11 xserverrc-local.example'
 ### Append to prepare.sh:
 XMETHOD="${XMETHOD:-x11}"
 
-install xorg dmz-cursor-theme kbd
-# Fix launching X11 from inside crosh (user doesn't own a TTY)
-sed -i 's/allowed_users=.*/allowed_users=anybody/' '/etc/X11/Xwrapper.config'
+#FIXME(arch): xorg installs too many packages
+install xorg arch=,dmz-cursor-theme arch=ttf-dejavu kbd
+
+if [ "${DISTROAKA:-"$DISTRO"}" = 'debian' ]; then
+    # Fix launching X11 from inside crosh (user doesn't own a TTY)
+    sed -i 's/allowed_users=.*/allowed_users=anybody/' /etc/X11/Xwrapper.config
+fi
 
 # Make chvt and fgconsole SUID root so we don't need to run keylaunch as root
 chmod u+s /bin/chvt
