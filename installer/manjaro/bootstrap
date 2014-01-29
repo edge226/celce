@@ -103,7 +103,8 @@ while [ -n "$missing" ]; do
             REPO="`echo $PKG | cut -f 1 -d:`"
             PKGVER="`echo $PKG | cut -f 2 -d:`"
             FILE="`getdbfield "$REPO" "$PKGVER" "desc" "FILENAME"`"
-            MIRRORBASE="`echo $MIRROR | sed -e "s/\\$repo/$REPO/" \
+            MIRRORBASE="`echo $MIRROR | sed -e "s/\\$rel/$RELEASE/" \
+                                            -e "s/\\$repo/$REPO/" \
                                             -e "s/\\$arch/$ARCH/"`"
             curl $curlparams -o "$FETCHDIRPKG/$FILE" "$MIRRORBASE/$FILE" 1>&2
             tar xfk "$FETCHDIRPKG/$FILE" -C "$BOOTSTRAPCHROOT"
