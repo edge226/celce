@@ -6,14 +6,8 @@
 # This file is sourced from main.sh to update distro-specific defaults.
 # It must set at least ARCH and MIRROR if not already specified.
 
-if [ -z "$ARCH" ]; then
-    ARCH="`uname -m | sed -e 's i.86 i686 ;s arm.* armv7h ;'`"
-fi
-
 if [ -z "$MIRROR" ]; then
     if [ "$ARCH" = 'x86_64' -o "$ARCH" = 'i686' ]; then
-        MIRROR="${CROUTON_MIRROR_arch:-http://mirrors.kernel.org/archlinux/\$repo/os/\$arch}"
-    else
-        MIRROR="${CROUTON_MIRROR_alarm:-http://mirror.archlinuxarm.org/armv7h/\$repo}"
+        MIRROR="${CROUTON_MIRROR_manjaro:-http://mirror.jmu.edu/manjaro/\$repo/os/\$arch}"
     fi
 fi
