@@ -40,13 +40,14 @@ fi
 mkdir -p "$FETCHDIRDB" "$FETCHDIRPKG" "$BOOTSTRAPCHROOT"
 
 echo "Fetching repository packages list..." 1>&2
-echo "Mirror = $MIRROR"
+# echo "Mirror = $MIRROR"
 # Fetch Arch package database
 for REPO in $REPOS; do
     echo "Fetching $REPO..." 1>&2
-    echo "Variables = REPO $repo $REPO ARCH $arch $ARCH REL $rel $RELEASE"
+#    echo "Variables = REPO $repo $REPO ARCH $arch $ARCH REL $rel $RELEASE"
     MIRRORBASE="`echo $MIRROR | sed -e "s/\\$repo/$REPO/" \
                                     -e "s/\\$arch/$ARCH/"`"
+echo "$MIRRORBASE"
     curl $curlparams -o "$FETCHDIRDB/$REPO.db" "$MIRRORBASE/$REPO.db" 1>&2
     # Create package list in this format: $REPO:package-version
     tar tf "$FETCHDIRDB/$REPO.db" \
