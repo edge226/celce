@@ -44,7 +44,7 @@ echo "Mirror = $MIRROR"
 # Fetch Arch package database
 for REPO in $REPOS; do
     echo "Fetching $REPO..." 1>&2
-    echo "Variables = $repo $REPO $arch $ARCH $rel $RELEASE"
+    echo "Variables = REPO $repo $REPO ARCH $arch $ARCH REL $rel $RELEASE"
     MIRRORBASE="`echo $MIRROR | sed -e "s/\\$repo/$REPO/" \
                                     -e "s/\\$arch/$ARCH/"`"
     curl $curlparams -o "$FETCHDIRDB/$REPO.db" "$MIRRORBASE/$REPO.db" 1>&2
