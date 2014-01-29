@@ -11,7 +11,7 @@
 # https://wiki.archlinux.org/index.php/Install_from_Existing_Linux
 
 REPOS='core community extra'
-
+echo "$ARCH"
 if [ "$ARCH" = 'armv7h' ]; then
     REPOS="$REPOS alarm aur"
 elif [ "$ARCH" = 'x86_64' ]; then
