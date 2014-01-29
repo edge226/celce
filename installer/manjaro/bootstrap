@@ -10,7 +10,7 @@
 # This code is loosely based on a script found on the Arch Linux Wiki:
 # https://wiki.archlinux.org/index.php/Install_from_Existing_Linux
 
-REPOS='core community extra'
+REPOS='core community extra multilib'
 
 if [ "$ARCH" = 'armv7h' ]; then
     REPOS="$REPOS alarm aur"
