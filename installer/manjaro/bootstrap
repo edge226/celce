@@ -55,7 +55,6 @@ done
 # Get the value of a field in the Arch package database
 # getvaluedb repo pkgver [desc|depends] field
 getdbfield() {
-    echo "$FETCHDIRDB $1 $2 $3 $4"
     REPO="$FETCHDIRDB/$1.db"
     FILE="$2/$3"
     FIELD="$4"
