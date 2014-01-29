@@ -6,7 +6,7 @@
 # This is a distro-specific continuation of the prepare.sh script.
 
 PKGEXT='tar.xz'
-DISTROAKA='arch'
+DISTROAKA='manjaro'
 
 # aurcompile <package> <extra makepkg options>: compile package from AUR.
 # This should not be a permanent solution, as AUR packages cannot be trusted,
