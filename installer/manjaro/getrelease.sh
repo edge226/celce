@@ -18,10 +18,14 @@ fi
 
 rel="`sed -n -e 's/^ID=//p' "${2%/}/etc/os-release"`"
 
-if [ "$rel" = 'archarm' ]; then
-    rel="alarm"
-elif [ "$rel" != 'arch' ]; then
-    exit 1
+if [ "$rel" = 'stable' ]; then
+    rel="stable"
+elif [ "$rel" = 'testing' ]; then
+    rel="testing"
+elif [ "$rel" = 'unstable' ]; then
+    rel="unstable"
+else
+    exit 0
 fi
 
 # Print the architecture if requested
