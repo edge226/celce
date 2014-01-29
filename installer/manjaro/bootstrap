@@ -40,6 +40,7 @@ fi
 mkdir -p "$FETCHDIRDB" "$FETCHDIRPKG" "$BOOTSTRAPCHROOT"
 
 echo "Fetching repository packages list..." 1>&2
+echo "Mirror = "$MIRROR"
 # Fetch Arch package database
 for REPO in $REPOS; do
     echo "Fetching $REPO..." 1>&2
