@@ -10,10 +10,12 @@
 # This code is loosely based on a script found on the Arch Linux Wiki:
 # https://wiki.archlinux.org/index.php/Install_from_Existing_Linux
 
-REPOS='core community extra multilib'
+REPOS='core community extra'
 
 if [ "$ARCH" = 'armv7h' ]; then
     REPOS="$REPOS alarm aur"
+elif [ "$ARCH" = 'x86_64' ]; then
+    REPOS="$REPOS multilib"
 fi
 
 # Packages to install in the bootstrap chroot. Dependencies are automatically
@@ -55,7 +57,7 @@ done
 # Get the value of a field in the Arch package database
 # getvaluedb repo pkgver [desc|depends] field
 getdbfield() {
-    echo "$REPO $2 $3 $4"
+    echo "$FETCHDIRDB $1 $2 $3 $4"
     REPO="$FETCHDIRDB/$1.db"
     FILE="$2/$3"
     FIELD="$4"
