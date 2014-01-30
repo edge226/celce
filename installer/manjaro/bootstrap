@@ -97,6 +97,7 @@ while [ -n "$missing" ]; do
                 echo "Cannot find package $PACKAGE..." 1>&2
                 exit 1
             fi
+            echo "error 1"
             REPO="`echo $PKG | cut -f 1 -d:`"
             PKGVER="`echo $PKG | cut -f 2 -d:`"
             FILE="`getdbfield "$REPO" "$PKGVER" "desc" "FILENAME"`"
@@ -132,7 +133,7 @@ mv "$FETCHDIRDB"/*.db "$BOOTSTRAPCHROOT/var/lib/pacman/sync"
 mkdir -p "$BOOTSTRAPCHROOT/var/cache/pacman/pkg"
 mv "$FETCHDIRPKG"/* "$BOOTSTRAPCHROOT/var/cache/pacman/pkg"
 
-echo "arch" > "$BOOTSTRAPCHROOT/etc/hostname"
+echo "manjaro" > "$BOOTSTRAPCHROOT/etc/hostname"
 sed -ni '/^[ \t]*CheckSpace/ !p' "$BOOTSTRAPCHROOT/etc/pacman.conf"
 sed -i 's/^[ \t]*SigLevel[ \t].*/SigLevel = Never/' \
     "$BOOTSTRAPCHROOT/etc/pacman.conf"
