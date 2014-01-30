@@ -12,6 +12,15 @@ fi
 
 if [ -z "$MIRROR" ]; then
     if [ "$ARCH" = 'x86_64' -o "$ARCH" = 'i686' ]; then
+        MIRROR="${CROUTON_MIRROR_manjaro:-http://vm1.sorch.info/manjaro/\$rel/\$repo/\$arch}"
+    fi
+fi
+
+if [ -z "$MIRROR2" ]; then
+    if [ "$ARCH" = 'x86_64' -o "$ARCH" = 'i686' ]; then
         MIRROR="${CROUTON_MIRROR_manjaro:-http://mirror.jmu.edu/manjaro/\$rel/\$repo/\$arch}"
     fi
 fi
+
+BOOTSTRAP_RELEASE="stable"
+
