@@ -597,12 +597,12 @@ while [ -n "$t" ]; do
 done
 
 if [ -z "$RESTORE" -o -n "$UPDATE" ]; then
-        echo "test 1"
     chmod 500 "$CHROOT/prepare.sh"
-        echo "test 2"
 
+        echo "test 1"
     # Run the setup script inside the chroot
     sh -e "$HOSTBINDIR/enter-chroot" -c "$CHROOTS" -n "$NAME" -xx
+        echo "test 2"
 else
     # We don't actually need to run the prepare.sh when only restoring
     rm -f "$CHROOT/prepare.sh"
