@@ -97,7 +97,6 @@ while [ -n "$missing" ]; do
                 echo "Cannot find package $PACKAGE..." 1>&2
                 exit 1
             fi
-            echo "error 1"
             REPO="`echo $PKG | cut -f 1 -d:`"
             PKGVER="`echo $PKG | cut -f 2 -d:`"
             FILE="`getdbfield "$REPO" "$PKGVER" "desc" "FILENAME"`"
@@ -125,18 +124,19 @@ while [ -n "$missing" ]; do
 
     missing="$nextmissing"
 done
-
+echo "Error 2" #delete later
 # Move databases to bootstrap fs
 mkdir -p "$BOOTSTRAPCHROOT/var/lib/pacman/sync"
 mv "$FETCHDIRDB"/*.db "$BOOTSTRAPCHROOT/var/lib/pacman/sync"
 # Move package tarballs, so we can reinstall them properly
 mkdir -p "$BOOTSTRAPCHROOT/var/cache/pacman/pkg"
 mv "$FETCHDIRPKG"/* "$BOOTSTRAPCHROOT/var/cache/pacman/pkg"
-
+echo "Error 3 " #delete later
 echo "manjaro" > "$BOOTSTRAPCHROOT/etc/hostname"
 sed -ni '/^[ \t]*CheckSpace/ !p' "$BOOTSTRAPCHROOT/etc/pacman.conf"
 sed -i 's/^[ \t]*SigLevel[ \t].*/SigLevel = Never/' \
     "$BOOTSTRAPCHROOT/etc/pacman.conf"
-
+echo "Error 4" #delete later
 echo "$bootstrappkg" > "$BOOTSTRAPCHROOT"/crouton-bootstrap-pkg
+echo "boostrap done" #delete later
 
