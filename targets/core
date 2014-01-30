@@ -100,7 +100,7 @@ EOF
 
     echo 'Ensuring system is up-to-date...' 1>&2
     apt-get -y dist-upgrade
-elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' || 'manjaro' ]; then
+elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ] || [ "${DISTROAKA:-"$DISTRO"}" = 'manjaro' ]; then
     if [ -n "$MIRROR" -a "$MIRROR" != 'unspecified' ]; then
         if [ ! -e /etc/pacman.d/mirrorlist.pacorig ]; then
             cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacorig
@@ -137,7 +137,7 @@ if [ "${DISTROAKA:-"$DISTRO"}" = 'debian' ]; then
         locale-gen --lang en_US.UTF-8
         update-locale LANG=en_US.UTF-8
     fi
-elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' || 'manjaro' ]; then
+elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ] || [ "${DISTROAKA:-"$DISTRO"}" = 'manjaro' ]; then
     if [ ! -f '/etc/locale.conf' ]; then
         cp /etc/locale.gen /etc/locale.gen.pacorig
         sed -i -e 's/^#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
