@@ -221,14 +221,11 @@ END
 
     echo "Installing these base packages:"
     echo "$basepkg"
-	echo "test fail 1"
     pacman --noconfirm --needed -S $basepkg
-	echo "test fail 2"
 
     # Make sure all these packages are marked as installed explicitly
-    	echo "test fail 3"
+
     pacman -D --asexplicit $basepkg >/dev/null
-	echo "test fail 4"
     rm -f "$bootstrappkglist"
 
     # Request a script restart to refresh the mount environment and recreate
