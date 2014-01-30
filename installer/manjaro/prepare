@@ -171,7 +171,7 @@ If this gets stuck, generate entropy by moving the mouse around (e.g. do some
 random browsing).
 END
         pacman-key --init
-        pacman-key --populate archlinux
+        pacman-key --populate manjaro
     fi
 
     # Restore the original /etc/resolv.conf
