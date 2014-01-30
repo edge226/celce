@@ -189,11 +189,11 @@ END
     systemd-sysvcompat xfsprogs"
 
     # Only erase mirror if specified (in case pacman fails later on)
-    if [ -n "$MIRROR" -a "$MIRROR" != 'unspecified' ]; then
-        # Keep a reference of the existing mirrorlist
-        mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacorig
-        echo "Server = $MIRROR" > "/etc/pacman.d/mirrorlist"
-    fi
+    #if [ -n "$MIRROR" -a "$MIRROR" != 'unspecified' ]; then
+    #    # Keep a reference of the existing mirrorlist
+    #    mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacorig
+    #    echo "Server = $MIRROR" > "/etc/pacman.d/mirrorlist"
+    #fi
 
     # Synchronize
     pacman -Sy
