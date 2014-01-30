@@ -10,11 +10,15 @@
 # This code is loosely based on a script found on the Arch Linux Wiki:
 # https://wiki.archlinux.org/index.php/Install_from_Existing_Linux
 
-REPOS='core community extra multilib'
+REPOS='core community extra'
 
 if [ "$ARCH" = 'armv7h' ]; then
     REPOS="$REPOS alarm aur"
+elif [ "$ARCH" = 'x86_64'; then
+    REPOS="$REPOS multilib"
 fi
+
+
 
 # Packages to install in the bootstrap chroot. Dependencies are automatically
 # fetched, but finding a suitable virtual package is not supported, so we have
@@ -124,19 +128,14 @@ while [ -n "$missing" ]; do
 
     missing="$nextmissing"
 done
-echo "Error 2" #delete later
 # Move databases to bootstrap fs
 mkdir -p "$BOOTSTRAPCHROOT/var/lib/pacman/sync"
 mv "$FETCHDIRDB"/*.db "$BOOTSTRAPCHROOT/var/lib/pacman/sync"
 # Move package tarballs, so we can reinstall them properly
 mkdir -p "$BOOTSTRAPCHROOT/var/cache/pacman/pkg"
 mv "$FETCHDIRPKG"/* "$BOOTSTRAPCHROOT/var/cache/pacman/pkg"
-echo "Error 3 " #delete later
 echo "manjaro" > "$BOOTSTRAPCHROOT/etc/hostname"
 sed -ni '/^[ \t]*CheckSpace/ !p' "$BOOTSTRAPCHROOT/etc/pacman.conf"
 sed -i 's/^[ \t]*SigLevel[ \t].*/SigLevel = Never/' \
     "$BOOTSTRAPCHROOT/etc/pacman.conf"
-echo "Error 4" #delete later
 echo "$bootstrappkg" > "$BOOTSTRAPCHROOT"/crouton-bootstrap-pkg
-echo "boostrap done" #delete later
-
