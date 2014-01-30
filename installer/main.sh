@@ -597,7 +597,9 @@ while [ -n "$t" ]; do
 done
 
 if [ -z "$RESTORE" -o -n "$UPDATE" ]; then
+        echo "test 1"
     chmod 500 "$CHROOT/prepare.sh"
+        echo "test 2"
 
     # Run the setup script inside the chroot
     sh -e "$HOSTBINDIR/enter-chroot" -c "$CHROOTS" -n "$NAME" -xx
