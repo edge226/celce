@@ -14,7 +14,7 @@ REPOS='core community extra'
 
 if [ "$ARCH" = 'armv7h' ]; then
     REPOS="$REPOS alarm aur"
-elif [ "$ARCH" = 'x86_64'; then
+elif [ "$ARCH" = 'x86_64' ]; then
     REPOS="$REPOS multilib"
 fi
 
