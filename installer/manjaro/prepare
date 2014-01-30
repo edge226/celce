@@ -231,7 +231,10 @@ END
 
     # Request a script restart to refresh the mount environment and recreate
     # groups (/etc/group and other files were erased)
+    echo "test failure 1"
     relaunch_setup
+    echo "test failure 2"
+    
 fi
 
 # Fix the keyboard mode early on (this will be called again after dist-upgrade).
