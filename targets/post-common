@@ -32,7 +32,7 @@ echo 'Cleaning up...' 1>&2
 if [ "${DISTROAKA:-"$DISTRO"}" = 'debian' ]; then
     apt-get -y --purge autoremove
     apt-get clean
-elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' || manjaro ]; then
+elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' || 'manjaro' ]; then
     # Archlinux equivalent of autoremove (recursively remove unneeded packages)
     while true; do
         remove="`pacman -Qdtq || true`"
@@ -49,7 +49,7 @@ fi
 groups='audio,video,plugdev'
 if [ "${DISTROAKA:-"$DISTRO"}" = 'debian' ]; then
     groups="$groups,sudo"
-elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' || manjaro ]; then
+elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' || 'manjaro' ]; then
     groups="$groups,users,wheel"
     if [ ! -e /etc/sudoers.d/00-wheel ]; then
         echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/00-wheel
