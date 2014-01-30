@@ -221,20 +221,19 @@ END
 
     echo "Installing these base packages:"
     echo "$basepkg"
-
+	echo "test fail 1"
     pacman --noconfirm --needed -S $basepkg
+	echo "test fail 2"
 
     # Make sure all these packages are marked as installed explicitly
+    	echo "test fail 3"
     pacman -D --asexplicit $basepkg >/dev/null
-
+	echo "test fail 4"
     rm -f "$bootstrappkglist"
 
     # Request a script restart to refresh the mount environment and recreate
     # groups (/etc/group and other files were erased)
-    echo "test failure 1"
     relaunch_setup
-    echo "test failure 2"
-    
 fi
 
 # Fix the keyboard mode early on (this will be called again after dist-upgrade).
