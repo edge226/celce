@@ -100,13 +100,17 @@ EOF
 
     echo 'Ensuring system is up-to-date...' 1>&2
     apt-get -y dist-upgrade
-elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
+elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ] || [ "${DISTROAKA:-"$DISTRO"}" = 'manjaro' ] ; then
     if [ -n "$MIRROR" -a "$MIRROR" != 'unspecified' ]; then
-        if [ ! -e /etc/pacman.d/mirrorlist.pacorig ]; then
-            cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacorig
-        fi
+        if[ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
+            if [ ! -e /etc/pacman.d/mirrorlist.pacorig ]; then
+                cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacorig
+            fi
 
         echo "Server = $MIRROR" > /etc/pacman.d/mirrorlist
+        elif [ "${DISTROAKA:-"$DISTRO"}" = 'manjaro' ]; then
+            pacman-mirrors -g
+        fi
     fi
 
     echo 'Ensuring system is up-to-date...' 1>&2
