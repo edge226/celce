@@ -195,6 +195,9 @@ END
         echo "Server = $MIRROR" > "/etc/pacman.d/mirrorlist"
     fi
 
+    # Generate mirrorlist.
+    pacman-mirrors -g
+
     # Synchronize
     pacman -Sy
 
