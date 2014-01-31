@@ -160,58 +160,54 @@ build_cras() {
 		apt-get update
             fi
             pkgconfigpath="/usr/lib/$cras_arch-linux-gnu/pkgconfig"
-        elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
+        elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ] || [ "${DISTROAKA:-"$DISTRO"}" = 'manjaro' ]; then
             pkgaffix="lib32-"
             pkgconfigpath="/usr/lib32/pkgconfig"
         fi
         archgccflags='-m32'
     fi
 
-    if [ "${DISTROAKA:-"$DISTRO"}" = 'manjaro' ]; then
-    install manjaro-alsa speex lib32-speex
+    # Install CRAS dependencies
+    install --minimal alsa-utils \
+    libasound2$pkgsuffix libspeexdsp1$pkgsuffix
+   
+    install --minimal --asdeps gcc $pkgdepextra libc6-dev$pkgsuffix \
+        pkg-config libspeexdsp-dev$pkgsuffix
+ 
+    # precise does not allow libasound2-dev and libasound2-dev:i386 to be
+    # installed simultaneously
+    if release -le precise && [ -n "$cras_arch" ]; then
+        install --minimal --asdeps libasound2-dev
+        # Manually link .so file
+        libasoundso="/usr/lib$archextrapath/libasound.so"
+        if [ ! -f "$libasoundso" ]; then
+            addtrap "rm -f '$libasoundso' 2>/dev/null"
+            ln -sfT libasound.so.2 "$libasoundso"
+        fi
+        ALSALIBDIR="/usr/lib$archextrapath/alsa-lib"
     else
-        # Install CRAS dependencies
-        install --minimal alsa-utils \
-        libasound2$pkgsuffix libspeexdsp1$pkgsuffix
-
-        install --minimal --asdeps gcc $pkgdepextra libc6-dev$pkgsuffix \
-            pkg-config libspeexdsp-dev$pkgsuffix
-
-        # precise does not allow libasound2-dev and libasound2-dev:i386 to be
-        # installed simultaneously
-        if release -le precise && [ -n "$cras_arch" ]; then
-            install --minimal --asdeps libasound2-dev
-            # Manually link .so file
-            libasoundso="/usr/lib$archextrapath/libasound.so"
-            if [ ! -f "$libasoundso" ]; then
-                addtrap "rm -f '$libasoundso' 2>/dev/null"
-                ln -sfT libasound.so.2 "$libasoundso"
-            fi
-            ALSALIBDIR="/usr/lib$archextrapath/alsa-lib"
-        else
-            install --minimal --asdeps libasound2-dev$pkgsuffix
-            ALSALIBDIR="`PKG_CONFIG_PATH="$pkgconfigpath" \
-                                    pkg-config --variable=libdir alsa`/alsa-lib"
-        fi
-
-        # SBC is not available in older Debian/Ubuntu: fetch it manually
-        if release -le quantal; then
-            install_mirror_package 'libsbc1' \
-                                'pool/main/s/sbc' '1\.0-.*' $cras_arch
-            install_mirror_package --asdeps 'libsbc-dev' \
-                                'pool/main/s/sbc' '1\.0-.*' $cras_arch
-        elif release -le wheezy -eq kali; then
-            # wheezy provides a backport for libsbc1
-            install_mirror_package 'libsbc1' \
-                                'pool/main/s/sbc' '.*~bpo7\+.*' $cras_arch
-            install_mirror_package --asdeps 'libsbc-dev' \
-                                'pool/main/s/sbc' '.*~bpo7\+.*' $cras_arch
-        else
-            install --minimal libsbc1$pkgsuffix
-            install --minimal --asdeps libsbc-dev$pkgsuffix
-        fi
+        install --minimal --asdeps libasound2-dev$pkgsuffix
+        ALSALIBDIR="`PKG_CONFIG_PATH="$pkgconfigpath" \
+                                pkg-config --variable=libdir alsa`/alsa-lib"
     fi
-
+ 
+    # SBC is not available in older Debian/Ubuntu: fetch it manually
+    if release -le quantal; then
+        install_mirror_package 'libsbc1' \
+                            'pool/main/s/sbc' '1\.0-.*' $cras_arch
+        install_mirror_package --asdeps 'libsbc-dev' \
+                            'pool/main/s/sbc' '1\.0-.*' $cras_arch
+     elif release -le wheezy -eq kali; then
+        # wheezy provides a backport for libsbc1
+        install_mirror_package 'libsbc1' \
+                            'pool/main/s/sbc' '.*~bpo7\+.*' $cras_arch
+        install_mirror_package --asdeps 'libsbc-dev' \
+                            'pool/main/s/sbc' '.*~bpo7\+.*' $cras_arch
+        else
+        install --minimal libsbc1$pkgsuffix
+        install --minimal --asdeps libsbc-dev$pkgsuffix
+    fi
+    
     # Start subshell for compilation
     (
         cd "$CRASBUILDTMP"
@@ -434,7 +430,7 @@ if [ "${DISTROAKA:-"$DISTRO"}" = 'debian' ]; then
     if [ "$ARCH" = 'amd64' ]; then
         build_cras 'i386'
     fi
-elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
+elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ] || [ "${DISTROAKA:-"$DISTRO"}" = 'manjaro' ]; then
     # Only build 32-bit version if multilib repository is setup
     if [ "$ARCH" = "x86_64" ] && arch_multilib; then
         build_cras 'i386'
@@ -490,7 +486,7 @@ fi
 
 # Default: include default configuration
 pa_default_prepend='.include /etc/pulse/default.pa'
-if [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
+if [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ] || [ "${DISTROAKA:-"$DISTRO"}" = 'manjaro' ]; then
     # Arch: do not include default configuration, but load native unix protocol
     # module, so that clients can connect
     pa_default_prepend='load-module module-native-protocol-unix'
@@ -509,7 +505,7 @@ set-default-source cras-source
 EOF
 
 touchconfigfiles=''
-if [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
+if [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ] || [ "${DISTROAKA:-"$DISTRO"}" = 'manjaro' ]; then
     touchconfigfiles='y'
 fi
 
