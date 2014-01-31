@@ -146,8 +146,8 @@ elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ] || [ "${DISTROAKA:-"$DISTRO"}" = 'ma
         cp /etc/locale.gen /etc/locale.gen.pacorig
         sed -i -e 's/^#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
         locale-gen
-        locale | head -n 13 > /etc/locale.conf
     fi
+    locale | head -n 13 > /etc/locale.conf
 fi
 
 # Link debian_chroot to the chroot name
