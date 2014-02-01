@@ -102,7 +102,7 @@ EOF
     apt-get -y dist-upgrade
 elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ] || [ "${DISTROAKA:-"$DISTRO"}" = 'manjaro' ] ; then
     if [ -n "$MIRROR" -a "$MIRROR" != 'unspecified' ]; then
-        if[ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
+        if [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
             if [ ! -e /etc/pacman.d/mirrorlist.pacorig ]; then
                 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacorig
             fi
@@ -146,8 +146,8 @@ elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ] || [ "${DISTROAKA:-"$DISTRO"}" = 'ma
         cp /etc/locale.gen /etc/locale.gen.pacorig
         sed -i -e 's/^#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
         locale-gen
-        echo 'LANG=en_US.UTF-8' > /etc/locale.conf
     fi
+    locale | head -n 13 > /etc/locale.conf
 fi
 
 # Link debian_chroot to the chroot name
