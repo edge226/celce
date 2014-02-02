@@ -6,12 +6,24 @@ REQUIRES='gtk-extra'
 DESCRIPTION='Installs the GNOME desktop environment. (Approx. 400MB)'
 HOSTBIN='startgnome'
 CHROOTBIN='startgnome gnome-session-wrapper'
+
+if [ "$TARGETS" != 'help' -a "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
+    error 1 "gnome target is not supported by crouton in Arch Linux."
+    # FIXME: Arch includes Gnome 2.8, which does not have an automatic fallback
+    # Even using gnome-flashback-session does not seem to help: startgnome
+    # on xephyr complains about lack of hardware AND software acceleration.
+    # Finally, /etc/X11/xinit/xinitrc behaviour is very different in Ubuntu vs
+    # Arch (it is a fallback xinitrc in Arch, but Ubuntu's sources
+    # /etc/X11/Xsession)
+fi
+
 . "${TARGETSDIR:="$PWD"}/common"
 
 ### Append to prepare.sh:
 install --minimal evolution-data-server gnome-control-center \
-        gnome-screensaver gnome-session gnome-session-fallback \
-        gnome-shell gnome-themes-standard gvfs-backends nautilus unzip
+        gnome-screensaver gnome-session \
+        arch=gnome-flashback-session,gnome-session-fallback \
+        gnome-shell gnome-themes-standard arch=,gvfs-backends nautilus unzip
 
 TIPS="$TIPS
 You can start GNOME via the startgnome host command: sudo startgnome

@@ -7,11 +7,16 @@
 # forms of X11.
 
 ### Append to prepare.sh:
+
+# Arch: Install xorg-xinit before creating /etc/X11/xinit/xserverrc, to make
+# sure it does not get erased if xorg-xinit is pulled later on
+install --minimal arch=xorg-xinit,
+
 # Store and apply the X11 method
 ln -sfT "/etc/crouton/xserverrc-$XMETHOD" '/etc/X11/xinit/xserverrc'
 
 # Install utilities and links for powerd-poking daemon
-compile xi2event '-lX11 -lXi' libx11-dev libxi-dev
+compile xi2event '-lX11 -lXi' arch=,libx11-dev arch=,libxi-dev
 install --minimal dbus
 ln -sf croutonpowerd /usr/local/bin/gnome-screensaver-command
 ln -sf croutonpowerd /usr/local/bin/xscreensaver-command
@@ -63,3 +68,28 @@ ResultAny=no
 ResultInactive=no
 ResultActive=no
 EOF
+
+# Setup default browser
+if [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
+    install arch=desktop-file-utils,
+
+    mkdir -p /usr/local/share/applications/
+
+    # Application preference: prefer applications that take most effort to be
+    # installed: firefox needs to be installed via pacman, chrome/chromium have
+    # a crouton target, "crouton" needs the extension target, and netsurf is
+    # the fallback installed by gtk-extra.
+    order="firefox.desktop;google-chrome.desktop;chromium.desktop"
+    order="$order;crouton.desktop;netsurf.desktop"
+    mimedefault='/usr/local/share/applications/mimeapps.list'
+    echo "[Added Associations]" > $mimedefault
+
+    # Protocol list is a common set of mime types found in the desktop files
+    # enumerated above
+    for mime in 'text/html' 'application/xhtml+xml' \
+                'x-scheme-handler/http' 'x-scheme-handler/https' \
+                'x-scheme-handler/ftp' ; do
+        echo "$mime=$order" >> $mimedefault
+    done
+    update-desktop-database -q
+fi
