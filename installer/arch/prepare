@@ -174,6 +174,12 @@ END
         pacman-key --init
         pacman-key --populate archlinux
     elif [ "${ARCH#arm}" = "$ARCH" ] && [ "$RELEASE" = 'manjaro' ]; then
+        cat 1>&2 <<END
+Initializing pacman keyring...
+If this gets stuck, generate entropy by moving the mouse around (e.g. do some
+random browsing).
+END
+
         pacman-key --init
         pacman-key --populate archlinux manjaro
     fi
