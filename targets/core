@@ -102,11 +102,15 @@ EOF
     apt-get -y dist-upgrade
 elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
     if [ -n "$MIRROR" -a "$MIRROR" != 'unspecified' ]; then
-        if [ ! -e /etc/pacman.d/mirrorlist.pacorig ]; then
-            cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacorig
-        fi
+        if [ "$RELEASE" = 'arch' ] || [ "$RELEASE" = 'alarm' ]; then
+            if [ ! -e /etc/pacman.d/mirrorlist.pacorig ]; then
+                cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacorig
+            fi
 
-        echo "Server = $MIRROR" > /etc/pacman.d/mirrorlist
+            echo "Server = $MIRROR" > /etc/pacman.d/mirrorlist
+        elif [ "$RELEASE" = 'manjaro' ]; then
+            pacman-mirrors -g
+        fi
     fi
 
     echo 'Ensuring system is up-to-date...' 1>&2
@@ -143,6 +147,9 @@ elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
         sed -i -e 's/^#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
         locale-gen
         echo 'LANG=en_US.UTF-8' > /etc/locale.conf
+    fi
+    if [ "$RELEASE" = 'manjaro' ]; then
+        locale | head -n 13 > /etc/locale.conf
     fi
 fi
 
