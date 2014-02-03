@@ -46,8 +46,14 @@ echo "Fetching repository packages list..." 1>&2
 # Fetch Arch package database
 for REPO in $REPOS; do
     echo "Fetching $REPO..." 1>&2
-    MIRRORBASE="`echo $MIRROR | sed -e "s/\\$repo/$REPO/" \
-                                    -e "s/\\$arch/$ARCH/"`"
+    if [ "$RELEASE" = 'arch' ] || [ "$RELEASE" = 'alarm' ]; then
+        MIRRORBASE="`echo $MIRROR | sed -e "s/\\$repo/$REPO/" \
+                                        -e "s/\\$arch/$ARCH/"`"
+    elif [ "$RELEASE" = 'manjaro' ]; then
+        MIRRORBASE="`echo $MIRROR | sed -e "s/\\$rel/$BOOTSTRAP_RELEASE/" \
+                                        -e "s/\\$repo/$REPO/" \
+                                        -e "s/\\$arch/$ARCH/"`"
+    fi
     curl $curlparams -o "$FETCHDIRDB/$REPO.db" "$MIRRORBASE/$REPO.db" 1>&2
     # Create package list in this format: $REPO:package-version
     tar tf "$FETCHDIRDB/$REPO.db" \
@@ -102,8 +108,14 @@ while [ -n "$missing" ]; do
             REPO="`echo $PKG | cut -f 1 -d:`"
             PKGVER="`echo $PKG | cut -f 2 -d:`"
             FILE="`getdbfield "$REPO" "$PKGVER" "desc" "FILENAME"`"
-            MIRRORBASE="`echo $MIRROR | sed -e "s/\\$repo/$REPO/" \
+            if [ "$RELEASE" = 'arch' ] || [ "$RELEASE" = 'alarm' ]; then
+                MIRRORBASE="`echo $MIRROR | sed -e "s/\\$repo/$REPO/" \
                                             -e "s/\\$arch/$ARCH/"`"
+            elif [ "$RELEASE" = 'manjaro' ]; then
+                MIRRORBASE="`echo $MIRROR | sed -e "s/\\$rel/$BOOTSTRAP_RELEASE/" \
+                                            -e "s/\\$repo/$REPO/" \
+                                            -e "s/\\$arch/$ARCH/"`"
+            fi
             curl $curlparams -o "$FETCHDIRPKG/$FILE" "$MIRRORBASE/$FILE" 1>&2
             tar xfk "$FETCHDIRPKG/$FILE" -C "$BOOTSTRAPCHROOT"
 
