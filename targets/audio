@@ -172,7 +172,7 @@ build_cras() {
         arch=${pkgaffix}alsa-lib,libasound2$pkgaffix \
         arch=${pkgaffix}speex,libspeexdsp1$pkgaffix
 
-    install --minimal --asdeps --noconfirm gcc $pkgdepextra arch=,libc6-dev$pkgaffix \
+    install --minimal --asdeps gcc $pkgdepextra arch=,libc6-dev$pkgaffix \
         pkg-config arch=,libspeexdsp-dev$pkgaffix
 
     # precise does not allow libasound2-dev and libasound2-dev:i386 to be
