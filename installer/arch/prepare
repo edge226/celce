@@ -96,7 +96,6 @@ install_dist() {
         if [ "$aurstrip" = "$1" ]; then
             if [ -n "$multilib" ] && \
 	       [ "$1" = "gcc" -o "$1" = "binutils" ]; then
-                pacman -R $pkgs
                 pkgs="$pkgs $1-multilib"
             else
                 pkgs="$pkgs $1"
