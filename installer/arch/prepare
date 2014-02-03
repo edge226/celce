@@ -106,7 +106,11 @@ install_dist() {
         shift
     done
     if [ -n "$pkgs" ]; then
-        pacman -S --noconfirm --needed $params $pkgs
+    	if [ "$pkgs" = 'gcc-multilib' -o "$pkgs' = 'binutils-multilib' ]; then
+    		pacman -S --needed $params $pkgs
+    	else
+        	pacman -S --noconfirm --needed $params $pkgs
+        fi
     fi
 
     if [ -n "$aurpkgs" ]; then
