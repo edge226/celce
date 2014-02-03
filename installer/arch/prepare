@@ -164,22 +164,27 @@ if [ -r "$bootstrappkglist" ]; then
         `cat "$bootstrappkglist"`
 
     # Initialize pacman keyring (i686/x86_64 only)
-    if [ "${ARCH#arm}" = "$ARCH" ]; then
+    if [ "${ARCH#arm}" = "$ARCH" ] && [ "$RELEASE" = 'arch' ] || [ "$RELEASE" = 'alarm' ]; then
         cat 1>&2 <<END
 Initializing pacman keyring...
 If this gets stuck, generate entropy by moving the mouse around (e.g. do some
 random browsing).
 END
+        
         pacman-key --init
         pacman-key --populate archlinux
+    elif [ "${ARCH#arm}" = "$ARCH" ] && [ "$RELEASE" = 'manjaro' ]; then
+        pacman-key --init
+        pacman-key --populate archlinux manjaro
     fi
-
+    
+    
     # Restore the original /etc/resolv.conf
     if [ -f /etc/resolv.conf.pacorig ]; then
         rm -f /etc/resolv.conf
         mv -f /etc/resolv.conf.pacorig /etc/resolv.conf
     fi
-
+    
     # Now install a proper set of base packages
 
     # Packages that are in base, but that we do not want to install in the
@@ -193,6 +198,9 @@ END
         # Keep a reference of the existing mirrorlist
         mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacorig
         echo "Server = $MIRROR" > "/etc/pacman.d/mirrorlist"
+        if [ "$RELEASE" = 'manjaro' ]; then
+            pacman-mirrors -g
+        fi
     fi
 
     # Synchronize
