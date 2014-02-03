@@ -172,6 +172,10 @@ build_cras() {
         arch=${pkgaffix}alsa-lib,libasound2$pkgaffix \
         arch=${pkgaffix}speex,libspeexdsp1$pkgaffix
 
+	if [ "$RELEASE" = 'manjaro' ]; then
+		pacman -R gcc-libs
+	fi
+
     install --minimal --asdeps gcc $pkgdepextra arch=,libc6-dev$pkgaffix \
         pkg-config arch=,libspeexdsp-dev$pkgaffix
 
