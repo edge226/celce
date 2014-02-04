@@ -102,7 +102,7 @@ while [ -n "$missing" ]; do
             MIRRORBASE="`echo $MIRROR | sed -e "s/\\$repo/$REPO/" \
                                             -e "s/\\$arch/$ARCH/"`"
             curl $curlparams -o "$FETCHDIRPKG/$FILE" "$MIRRORBASE/$FILE" 1>&2
-            tar xfk "$FETCHDIRPKG/$FILE" -C "$BOOTSTRAPCHROOT"
+            tar --warning=no-unknown-keyword -xkf "$FETCHDIRPKG/$FILE" -C "$BOOTSTRAPCHROOT"
 
             # Get list of dependencies (ignore versions)
             ndep="`getdbfield "$REPO" "$PKGVER" "depends" "DEPENDS" \
