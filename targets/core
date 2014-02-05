@@ -150,6 +150,7 @@ elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
         locale-gen
         echo 'LANG=en_US.UTF-8' > /etc/locale.conf
     fi
+    locale | head -n 13 > /etc/locale.conf
 fi
 
 # Link debian_chroot to the chroot name
