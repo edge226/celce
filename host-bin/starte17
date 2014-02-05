@@ -12,7 +12,8 @@ USAGE="$APPLICATION [options]
 Wraps enter-chroot to start an e17 session.
 By default, it will log into the primary user on the first chroot found.
 
-Options are directly passed to enter-chroot; run enter-chroot to list them."
+Options are directly passed to enter-chroot; run enter-chroot to list 
+them."
 
 exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t e17 "$@" \
     exec xinit /usr/bin/enlightenment_start
