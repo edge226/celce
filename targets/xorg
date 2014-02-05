@@ -18,6 +18,11 @@ XMETHOD="${XMETHOD:-x11}"
 #FIXME(arch): xorg installs too many packages
 install xorg arch=,dmz-cursor-theme arch=ttf-dejavu kbd
 
+if [ "$RELEASE" = 'manjaro' ]; then
+    mhwd -i pci video-intel
+    mhwd-gpu --setgl mesa
+fi
+
 if [ "${DISTROAKA:-"$DISTRO"}" = 'debian' ]; then
     # Fix launching X11 from inside crosh (user doesn't own a TTY)
     sed -i 's/allowed_users=.*/allowed_users=anybody/' /etc/X11/Xwrapper.config
