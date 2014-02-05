@@ -11,7 +11,7 @@ if [ -w "$fbc" ]; then
 fi
 
 XMETHOD='x11'
-XARGS='-- :1 -nolisten tcp'
+XARGS='-nolisten tcp'
 if [ -f /etc/crouton/xserverrc-local ]; then
     . /etc/crouton/xserverrc-local
 fi
