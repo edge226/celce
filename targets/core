@@ -151,6 +151,8 @@ elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
         echo 'LANG=en_US.UTF-8' > /etc/locale.conf
     fi
     if [ "$RELEASE" = 'manjaro' ]; then
+        sed -i -e 's/^#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
+        locale-gen
         locale | head -n 13 > /etc/locale.conf
     fi
 fi
