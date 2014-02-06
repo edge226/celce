@@ -24,6 +24,8 @@ fi
 
 if [ "$RELEASE" = 'manjaro' ]; then
     echo "Which repository would you like to use? (stable testing unstable)"
-    read BOOTSTRAP_RELEASE
+    read RELEASE_REPOSITORY
+    BOOTSTRAP_RELEASE="$RELEASE_REPOSITORY"
+    export RELEASE_REPOSITORY
 fi
 
