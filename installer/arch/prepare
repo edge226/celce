@@ -210,7 +210,7 @@ END
     fi
 
     # Synchronize
-    pacman -Sy
+    pacman -Syy
 
     # Build a reasonable set of base packages, using pacman's output as reference,
     # then remove packages in PACKAGES_TARGET_IGNORE.
