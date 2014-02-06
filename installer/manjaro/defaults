@@ -22,4 +22,4 @@ if [ -z "$MIRROR2" ]; then
     fi
 fi
 
-BOOTSTRAP_RELEASE='stable'
+BOOTSTRAP_RELEASE="stable"
