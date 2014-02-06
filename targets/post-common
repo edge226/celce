@@ -45,6 +45,28 @@ elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
     yes | pacman -Scc
 fi
 
+# Advise user how to change repository branches for manjaro.
+if [ "$RELEASE" = 'manjaro' ]; then
+echo "The default repository for Manjaro is the stable branch.
+
+You may want to change your repository at a later time.
+The options for the branches are stable testing and unstable.
+
+Here is a rough update schedule for Manjaro branches and what
+they do:
+The stable branch get updates bi-weekly from Manjaro testing.
+    -This branch is for those that want maximum stability.
+The testing branch get updates weekly from Manjaro unstable.
+    -This branch is for those that want a safe mix.
+The unstable branch get daily updates from Arch stable.
+    -This branch is for those that want maximum security.
+
+Use the following commands when in the chroot to change what branch you
+want to use:
+sudo pacman-mirrors -g -b <branch>
+sudo pacman -Syyu"
+fi
+
 # Add the primary user
 groups='audio,video,plugdev'
 if [ "${DISTROAKA:-"$DISTRO"}" = 'debian' ]; then
