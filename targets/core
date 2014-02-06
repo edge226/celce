@@ -109,7 +109,8 @@ elif [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
 
             echo "Server = $MIRROR" > /etc/pacman.d/mirrorlist
         elif [ "$RELEASE" = 'manjaro' ]; then
-            pacman-mirrors -g
+            pacman-mirrors -g -b "$BOOSTRAP_RELEASE"
+            pacman -Syy
         fi
     fi
 
