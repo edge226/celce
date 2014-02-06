@@ -36,5 +36,5 @@ want to use:
 sudo pacman-mirrors -g -b <branch>
 sudo pacman -Syyu
 Press Enter to continue the installation: "
-read
+read tmp
 fi
