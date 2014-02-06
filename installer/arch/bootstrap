@@ -53,7 +53,6 @@ for REPO in $REPOS; do
         MIRRORBASE="`echo $MIRROR | sed -e "s/\\$rel/$BOOTSTRAP_RELEASE/" \
                                         -e "s/\\$repo/$REPO/" \
                                         -e "s/\\$arch/$ARCH/"`"
-        echo "MIRRORBASE = $MIRRORBASE"
     fi
     curl $curlparams -o "$FETCHDIRDB/$REPO.db" "$MIRRORBASE/$REPO.db" 1>&2
     # Create package list in this format: $REPO:package-version
@@ -116,7 +115,6 @@ while [ -n "$missing" ]; do
                 MIRRORBASE="`echo $MIRROR | sed -e "s/\\$rel/$BOOTSTRAP_RELEASE/" \
                                             -e "s/\\$repo/$REPO/" \
                                             -e "s/\\$arch/$ARCH/"`"
-                echo "MIRRORBASE = $MIRRORBASE"
             fi
             curl $curlparams -o "$FETCHDIRPKG/$FILE" "$MIRRORBASE/$FILE" 1>&2
             tar xfk "$FETCHDIRPKG/$FILE" -C "$BOOTSTRAPCHROOT"
