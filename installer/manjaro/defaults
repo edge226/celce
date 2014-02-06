@@ -23,9 +23,18 @@ if [ -z "$MIRROR2" ]; then
 fi
 
 if [ "$RELEASE" = 'manjaro' ]; then
-    echo "Which repository would you like to use? (stable testing unstable)"
-    read RELEASE_REPOSITORY
-    BOOTSTRAP_RELEASE="$RELEASE_REPOSITORY"
-    export RELEASE_REPOSITORY
+    BOOTSTRAP_RELEASE='stable'
+    echo "The default repository for Manjaro is the stable branch.
+You may want to change your repository at a later time.
+The options for the branches are stable testing and unstable.
+Here is a rough update schedule for Manjaro:
+The stable branch get updates bi-weekly from Manjaro testing.
+The testing branch get updates weekly from Manjaro unstable.
+The unstable branch get daily updates from Arch stable.
+Use the following commands when in the chroot to change what branch you
+want to use:
+sudo pacman-mirrors -g -b <branch>
+sudo pacman -Syyu
+Press Enter to continue the installation: "
+read
 fi
-
