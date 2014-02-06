@@ -205,7 +205,7 @@ END
         mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.pacorig
         echo "Server = $MIRROR" > "/etc/pacman.d/mirrorlist"
         if [ "$RELEASE" = 'manjaro' ]; then
-            pacman-mirrors -g
+            pacman-mirrors -g -b "$BOOTSTRAP_RELEASE"
         fi
     fi
 
