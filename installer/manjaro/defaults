@@ -22,5 +22,8 @@ if [ -z "$MIRROR2" ]; then
     fi
 fi
 
-BOOTSTRAP_RELEASE="stable"
+if [ "$RELEASE" = 'manjaro' ]; then
+    echo "Which repository would you like to use? (stable testing unstable)"
+    read BOOTSTRAP_RELEASE
+fi
 
