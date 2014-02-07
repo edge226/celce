@@ -131,7 +131,7 @@ fi
 if [ "$RELEASE" = 'manjaro' ]; then
     pacman -S --noconfirm base-devel git yaourt
     if [ "$ARCH" = 'x86_64' ]; then
-        yes | pacman -S gcc-multilib binutils-multilib lib32-fakeroot libtool-multilib
+        yes | pacman -S gcc-multilib binutils-multilib
     fi
 fi
 # On release upgrade, keyboard-configuration might be reconfigured.
