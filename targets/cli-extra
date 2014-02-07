@@ -9,7 +9,7 @@ CHROOTBIN='croutonpowerd'
 . "${TARGETSDIR:="$PWD"}/common"
 
 ### Append to prepare.sh:
-install dbus arch=openssh,openssh-client kbd manjaro=git manjaro=yaourt
+install dbus arch=openssh,openssh-client kbd
 
 
 TIPS="$TIPS
