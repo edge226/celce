@@ -42,4 +42,5 @@ while [ -f "/tmp/.X$disp-lock" ]; do
     disp=$((disp+1))
 done
 
+syndaemon -t -k -i 2 -d
 exec /usr/bin/xinit /usr/local/bin/croutonxinitrc-wrapper "$@" $dash $xserverrc ":$disp"
