@@ -26,7 +26,7 @@ if [ "${DISTROAKA:-"$DISTRO"}" = 'debian' ]; then
             arch=gnome-flashback-session,gnome-session-fallback \
             gnome-shell gnome-themes-standard arch=,gvfs-backends nautilus unzip
 elif [ "$RELEASE" = 'manjaro' ]; then
-    install gnome-shell gnome-shell-extensions xorg-twm xterm xorg-xclock
+    install gnome-shell gnome-shell-extensions gnome-session xorg-twm xterm xorg-xclock
 fi
 
 TIPS="$TIPS
