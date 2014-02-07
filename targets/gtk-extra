@@ -3,7 +3,8 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 REQUIRES='x11'
-DESCRIPTION='GTK-based tools including gdebi, gksu, and a simple browser.'
+DESCRIPTION='GTK-based tools including gdebi, gksu, a simple browser. The manjaro edition includes
+firefox, geany and meld.'
 . "${TARGETSDIR:="$PWD"}/common"
 
 ### Append to prepare.sh:
