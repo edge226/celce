@@ -20,6 +20,8 @@ rel="`sed -n -e 's/^ID=//p' "${2%/}/etc/os-release"`"
 
 if [ "$rel" = 'archarm' ]; then
     rel="alarm"
+elif [ "$rel" = 'manjaro' ]; then
+    rel="manjaro"
 elif [ "$rel" != 'arch' ]; then
     exit 1
 fi
