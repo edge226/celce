@@ -128,8 +128,11 @@ END
         exit $ret
     fi
 fi
-if [ "$RELEASE" = 'manjaro' ] && [ "$ARCH" = 'x86_64' ]; then
-    yes | pacman -S gcc-libs-multilib
+if [ "$RELEASE" = 'manjaro' ]; then
+    [ "$ARCH" = 'x86_64' ]; then
+        yes | pacman -S gcc-libs-multilib
+    fi
+    yes | pacman -S base-devel git yaourt
 fi
 # On release upgrade, keyboard-configuration might be reconfigured.
 fixkeyboardmode
