@@ -13,8 +13,8 @@ Wraps enter-chroot to start a CLI session in a new VT.
 By default, it will log into the primary user on the first chroot found.
 
 Options are directly passed to enter-chroot; run enter-chroot to list them."
-target=''
-options=''
+#target=''
+#options=''
 
 for i in $@; do
     if [ "$i" = "$1" ]; then
