@@ -20,7 +20,11 @@ for i in $@; do
     if [ "$i" = "$1" ]; then
         target="$i"
     elif [ ! "$i" = "$target" ]; then
-        options="$options $i"
+        if [ "$options" = '' ]; then
+            options="$i"
+        else
+            options="$options $i"
+        fi
         echo "options = $options"
     fi
 done
