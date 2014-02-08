@@ -19,18 +19,15 @@ options=''
 for i in $@; do
     if [ "$i" = "$1" ]; then
         target="$i"
-        x=1
     elif [ ! "$i" = "$target" ]; then
-        options[${!x}]="$i"
-        x++
-        echo "options = $options[$x]"
+        options="$options$i"
+        echo "options = $options"
     fi
 done
 
 case "$target" in
     cli )
         target='cli-extra'
-        echo "$target"
         export TERM='linux'
         exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l "$options"\
         openvt -vws --
@@ -42,11 +39,11 @@ case "$target" in
     ;;
     e18 )
         target='e17'
-        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target""$options" \
+        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" "$options" \
         exec xinit /usr/bin/enlightenment_start
     ;;
     e17 )
-        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target""$options" \
+        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" "$options" \
         exec xinit /usr/bin/enlightenment_start
     ;;
 esac
