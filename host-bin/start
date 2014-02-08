@@ -30,6 +30,7 @@ echo "target = $target"
 case "$target" in
     cli )
         target='cli-extra'
+        echo "$target"
         export TERM='linux'
         exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l "$options"\
         openvt -vws --
