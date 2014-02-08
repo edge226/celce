@@ -24,13 +24,13 @@ for i in $@; do
     else
         case "$target" in
             
-            cli)
+            cli )
             target='cli-extra'
             export TERM='linux'
             exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l "$options"\
             openvt -vws --
             ;;
-            cli-extra) 
+            cli-extra ) 
             export TERM='linux'
             exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l "$options"\
             openvt -vws --
