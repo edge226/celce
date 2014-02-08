@@ -19,28 +19,24 @@ options=''
 for i in $@; do
     if [ "$i" = "$1" ]; then
         target="$i"
+        x=1
     elif [ ! "$i" = "$target" ]; then
-        if [ "$options" = '' ]; then
-            options="$i"
-        else
-            options="$options $i"
-        fi
-        echo "options = $options"
+        options["$x"]="$i"
+        echo "options = $options[$x]"
     fi
 done
 
-echo "target = $target"
 case "$target" in
     cli )
         target='cli-extra'
         echo "$target"
         export TERM='linux'
-        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l"$options"\
+        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l "$options"\
         openvt -vws --
     ;;
     cli-extra ) 
         export TERM='linux'
-        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l"$options"\
+        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l "$options"\
         openvt -vws --
     ;;
     e18 )
