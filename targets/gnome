@@ -7,7 +7,7 @@ DESCRIPTION='Installs the GNOME desktop environment. (Approx. 400MB)'
 HOSTBIN='startgnome'
 CHROOTBIN='startgnome gnome-session-wrapper'
 
-if [ "$TARGETS" != 'help' -a "${DISTROAKA:-"$DISTRO"}" = 'arch' ] && [ ! "$RELEASE" = 'manjaro' ]; then
+if [ "$TARGETS" != 'help' -a "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then # && [ ! "$RELEASE" = 'manjaro' ]; then
     error 1 "gnome target is not supported by crouton in Arch Linux."
     # FIXME: Arch includes Gnome 2.8, which does not have an automatic fallback
     # Even using gnome-flashback-session does not seem to help: startgnome
@@ -25,8 +25,8 @@ if [ "${DISTROAKA:-"$DISTRO"}" = 'debian' ]; then
             gnome-screensaver gnome-session \
             arch=gnome-flashback-session,gnome-session-fallback \
             gnome-shell gnome-themes-standard arch=,gvfs-backends nautilus unzip
-elif [ "$RELEASE" = 'manjaro' ]; then
-    install gnome-shell gnome-shell-extensions gnome-session xorg-twm xterm xorg-xclock
+#elif [ "$RELEASE" = 'manjaro' ]; then
+#    install gnome-shell gnome-shell-extensions gnome-session xorg-twm xterm xorg-xclock
 fi
 
 TIPS="$TIPS
