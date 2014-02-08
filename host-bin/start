@@ -14,10 +14,12 @@ By default, it will log into the primary user on the first chroot found.
 
 Options are directly passed to enter-chroot; run enter-chroot to list them."
 
+n=2
+echo 
 
 case "$1" in
     cli)
         export TERM='linux'
-        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t cli-extra -l "$@"\
+        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t cli-extra -l ${@:$n:1}\
     openvt -vws --;;
 esac
