@@ -17,6 +17,6 @@ Options are directly passed to enter-chroot; run enter-chroot to list them."
 case "$1" in
     cli-extra)
         export TERM='linux'
-        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -l -t "$@"\
+        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$1" -l "$@"\
     openvt -vws --;;
 esac
