@@ -35,21 +35,21 @@ case "$target" in
         target='cli-extra'
         echo "$target"
         export TERM='linux'
-        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l "$options"\
+        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l"$options"\
         openvt -vws --
     ;;
     cli-extra ) 
         export TERM='linux'
-        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l "$options"\
+        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l"$options"\
         openvt -vws --
     ;;
     e18 )
         target='e17'
-        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" "$options" \
+        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target""$options" \
         exec xinit /usr/bin/enlightenment_start
     ;;
     e17 )
-        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" "$options" \
+        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target""$options" \
         exec xinit /usr/bin/enlightenment_start
     ;;
 esac
