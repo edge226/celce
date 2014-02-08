@@ -3,13 +3,13 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 REQUIRES='core'
-DESCRIPTION='Basic CLI tools such as ssh. For manjaro this will add base-devel git and yaourt'
+DESCRIPTION='Basic CLI tools such as ssh. For manjaro this will add htop'
 HOSTBIN='startcli'
 CHROOTBIN='croutonpowerd'
 . "${TARGETSDIR:="$PWD"}/common"
 
 ### Append to prepare.sh:
-install dbus arch=openssh,openssh-client kbd
+install dbus arch=openssh,openssh-client kbd manjaro=htop
 
 
 TIPS="$TIPS
