@@ -23,7 +23,7 @@ for i in $@; do
         x++
     fi
 done
-
+echo "case is $1"
 case "$1" in
     cli)
         target='cli-extra'
