@@ -19,14 +19,14 @@ options=''
 for i in $@; do
     if [ "$i" = "$1" ]; then
         target="$i"
-        echo "target = $target"
     elif [ ! "$i" = "$target" ]; then
-        options+='"$i"'
+        options="$options $i"
         echo "options = $options"
     else
         
     fi
 done
+echo "target = $target"
 case "$target" in
     cli )
         target='cli-extra'
