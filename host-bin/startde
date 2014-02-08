@@ -21,7 +21,8 @@ for i in $@; do
         target="$i"
         x=1
     elif [ ! "$i" = "$target" ]; then
-        options["$x"]="$i"
+        options[${!x}]="$i"
+        x++
         echo "options = $options[$x]"
     fi
 done
