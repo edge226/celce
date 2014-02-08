@@ -21,17 +21,20 @@ for i in $@; do
     elif [ ! "$i" = '' ]; then
         options[$x]="$i"
         x++
+    else
+        case "$1" in
+            
+            cli)
+            target='cli-extra'
+            export TERM='linux'
+            exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l "$options"\
+            openvt -vws --
+            ;;
+            cli-extra) 
+            export TERM='linux'
+            exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l "$options"\
+            openvt -vws --
+            ;;
+        esac
     fi
 done
-echo "case is $1"
-case "$1" in
-    cli)
-        target='cli-extra'
-        export TERM='linux'
-        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l "$options"\
-        openvt -vws --;;
-    cli-extra) 
-        export TERM='linux'
-        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l "$options"\
-        openvt -vws --;;
-esac
