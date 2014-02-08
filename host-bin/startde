@@ -39,11 +39,11 @@ case "$target" in
     ;;
     e18 )
         target='e17'
-        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" "$options" \
+        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" "$options"\
         exec xinit /usr/bin/enlightenment_start
     ;;
     e17 )
-        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" "$options" \
+        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" "$options"\
         exec xinit /usr/bin/enlightenment_start
     ;;
 esac
