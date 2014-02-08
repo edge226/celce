@@ -17,12 +17,12 @@ Options are directly passed to enter-chroot; run enter-chroot to list them."
 for i in $@; do
     if [ "$i" = "$1" ]; then
         target="$i"
-        x=0     # x and y are array placeholders.
-    elif [ ! "$i" = '' ]; then
-        options[$x]="$i"
-        x++
+        echo "target = $target"
+    elif [ ! "$i" = "$target" ]; then
+        options+="$i"
+        echo "options = $options"
     else
-        case "$1" in
+        case "$target" in
             
             cli)
             target='cli-extra'
@@ -38,3 +38,4 @@ for i in $@; do
         esac
     fi
 done
+exit
