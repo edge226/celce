@@ -13,6 +13,8 @@ Wraps enter-chroot to start a CLI session in a new VT.
 By default, it will log into the primary user on the first chroot found.
 
 Options are directly passed to enter-chroot; run enter-chroot to list them."
+target=''
+options=''
 
 for i in $@; do
     if [ "$i" = "$1" ]; then
@@ -22,20 +24,20 @@ for i in $@; do
         options+="$i"
         echo "options = $options"
     else
-        case "$target" in
-            
-            cli )
-            target='cli-extra'
-            export TERM='linux'
-            exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l "$options"\
-            openvt -vws --
-            ;;
-            cli-extra ) 
-            export TERM='linux'
-            exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l "$options"\
-            openvt -vws --
-            ;;
-        esac
+        
     fi
 done
+case "$target" in
+    cli )
+        target='cli-extra'
+        export TERM='linux'
+        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l "$options"\
+        openvt -vws --
+    ;;
+    cli-extra ) 
+        export TERM='linux'
+        exec sh -e "`dirname "\`readlink -f "$0"\`"`/enter-chroot" -t "$target" -l "$options"\
+        openvt -vws --
+    ;;
+esac
 exit
