@@ -21,7 +21,7 @@ for i in $@; do
         target="$i"
         echo "target = $target"
     elif [ ! "$i" = "$target" ]; then
-        options+="$i"
+        options+='"$i"'
         echo "options = $options"
     else
         
