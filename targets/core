@@ -134,7 +134,7 @@ if [ "$RELEASE" = 'manjaro' ]; then
     elif [ "$ARCH" = 'x86_64' ]; then
         install autoconf automake bison file findutils flex gawk gettext grep which
         install groff gzip m4 make pacman patch pkg-config sed sudo texinfo util-linux
-        yes | pacman -S gcc-multilib binutils-multilib lib32-fakeroot libtool-multilib
+        yes | pacman -S gcc-multilib
     fi
     install git yaourt
 fi
