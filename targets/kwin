@@ -6,8 +6,7 @@ REQUIRES='gtk-extra'
 DESCRIPTION='Installs kdebase-workspace for kwin in xfce.'
 . "${TARGETSDIR:="$PWD"}/common"
 
-
-install manjaro=kdebase-workspace
+install arch=kdebase-workspace
 
 TIPS="$TIPS
 You can start Xfce via the startxfce4 host command: sudo startxfce4
