@@ -6,8 +6,13 @@ REQUIRES='gtk-extra'
 DESCRIPTION='Installs kdebase-workspace for kwin in xfce.'
 . "${TARGETSDIR:="$PWD"}/common"
 
-install arch=kdebase-workspace
+if [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
+    pacman --noconfirm -S kdebase-workspace
+else
+    echo "This can only be used with Arch and Manjaro."
+fi
 
 TIPS="$TIPS
-You can start Xfce via the startxfce4 host command: sudo startxfce4
+To use KWIN inside XFCE launch: kwin --replace
+Next launches should session kwin to launch automatically.
 "
