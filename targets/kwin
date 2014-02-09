@@ -8,14 +8,14 @@ DESCRIPTION='Installs kdebase-workspace for kwin in xfce.'
 
 ### Append to prepare.sh:
 
-echo "Installing Kwin."
-pacman --noconfirm -S kdebase-workspace
+#echo "Installing Kwin."
+#pacman --noconfirm -S kdebase-workspace
 
-#if [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
-#    pacman --noconfirm -S kdebase-workspace
-#else
-#    echo "This can only be used with Arch and Manjaro."
-#fi
+if [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
+    pacman --noconfirm -S kdebase-workspace
+else
+    echo "This can only be used with Arch and Manjaro."
+fi
 
 TIPS="$TIPS
 To use KWIN inside XFCE launch: kwin --replace
