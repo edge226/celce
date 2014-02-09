@@ -16,7 +16,7 @@ CHROOTETC='xbindkeysrc.scm xserverrc-x11 xserverrc-local.example'
 XMETHOD="${XMETHOD:-x11}"
 
 #FIXME(arch): xorg installs too many packages
-install xorg arch=,dmz-cursor-theme arch=ttf-dejavu kbd
+install xorg arch=,dmz-cursor-theme arch=ttf-dejavu kbd arch=ttf-liberation
 
 if [ "$RELEASE" = 'manjaro' ]; then
     mhwd -f -i pci video-intel
