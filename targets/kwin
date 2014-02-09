@@ -6,7 +6,9 @@ REQUIRES='gtk-extra'
 DESCRIPTION='Installs kdebase-workspace for kwin in xfce.'
 . "${TARGETSDIR:="$PWD"}/common"
 
+echo "Installing Kwin."
 pacman --noconfirm -S kdebase-workspace
+
 #if [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
 #    pacman --noconfirm -S kdebase-workspace
 #else
