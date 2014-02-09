@@ -19,7 +19,7 @@ XMETHOD="${XMETHOD:-x11}"
 install xorg arch=,dmz-cursor-theme arch=ttf-dejavu kbd
 
 if [ "$RELEASE" = 'manjaro' ]; then
-    mhwd -i pci video-intel
+    mhwd -f -i pci video-intel
     mhwd-gpu --setgl mesa
 fi
 
