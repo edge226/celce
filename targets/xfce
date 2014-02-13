@@ -47,7 +47,7 @@ if [ "$RELEASE" = 'manjaro' ]; then
     install xfce4-notifyd xfce4-sensors-plugin xfce4-systemload-plugin
     install xfce4-weather-plugin xfce4-whiskermenu-plugin
     install thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman
-    install manjaro-artwork manjaro-artwork-icons octopi octopi-notifier pnmixer
+    install manjaro-artwork manjaro-artwork-icons octopi octopi-notifier
 fi
 TIPS="$TIPS
 You can start Xfce via the startxfce4 host command: sudo startxfce4
