@@ -14,3 +14,7 @@ else
     echo "This can only be used with Arch and Manjaro."
 fi
 
+TIPS="$TIPS
+To use cairo-dock launch it from the menu under the system category.
+Next launches should session cairo-dock to launch automatically.
+"
