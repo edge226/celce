@@ -3,7 +3,7 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 REQUIRES='gtk-extra'
-DESCRIPTION='Installs kdebase-workspace for kwin in xfce.'
+DESCRIPTION='Installs cairo-dock and cairo-dock-plugins.'
 . "${TARGETSDIR:="$PWD"}/common"
 
 ### Append to prepare.sh:
