@@ -15,3 +15,5 @@ cd configs/celme
 chown -R root:root usr
 rsync -rqplH usr /
 rsync -rqplH etc /
+cd /
+rm -rf /tmp/git
