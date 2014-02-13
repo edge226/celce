@@ -136,7 +136,11 @@ if [ "$RELEASE" = 'manjaro' ]; then
         install groff gzip m4 make pacman patch pkg-config sed sudo texinfo util-linux
         yes | pacman -S gcc-multilib
     fi
-    install git yaourt rsync
+    install git yaourt rsync intel-ucode
+    # install compression tools
+    install arj lzop unrar unzip xz zip
+    # install fonts.
+    install terminus-font ttf-bitstream-vera ttf-dejavu ttf-inconsolata ttf-indic-otf ttf-liberation
 fi
 # On release upgrade, keyboard-configuration might be reconfigured.
 fixkeyboardmode
