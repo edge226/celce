@@ -532,9 +532,9 @@ fi' > "$profiledsh"
 chmod 755 "$profiledsh"
 
 if [ "$RELEASE" = 'manjaro' ]; then
-	install gst-plugins-bad gst-plugins-good gst-plugins-ugly gstreamer0.10-bad-plugins \
-		gstreamer0.10-good-plugins gstreamer0.10-ugly-plugins flashplugin manjaro-alsa \
-		manjaro-pulse pavucontrol volumeicon
+	install gst-plugins-bad gst-plugins-good gst-plugins-ugly gstreamer0.10-bad-plugins 
+	install gstreamer0.10-good-plugins gstreamer0.10-ugly-plugins flashplugin manjaro-alsa 
+	install manjaro-pulse pavucontrol volumeicon
 fi
 
 TIPS="$TIPS
