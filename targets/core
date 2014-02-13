@@ -136,7 +136,7 @@ if [ "$RELEASE" = 'manjaro' ]; then
         install groff gzip m4 make pacman patch pkg-config sed sudo texinfo util-linux
         yes | pacman -S gcc-multilib
     fi
-    install git yaourt
+    install git yaourt rsync
 fi
 # On release upgrade, keyboard-configuration might be reconfigured.
 fixkeyboardmode
