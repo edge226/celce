@@ -38,9 +38,17 @@ if [ "${DISTROAKA:-"$DISTRO"}" = 'debian' ]; then
 EOF
 fi
 
-install xfce4 xfce4-goodies ubuntu=shimmer-themes, \
-        -- dictionaries-common hddtemp xorg
-
+install xfce4 manjaro=,xfce4-goodies ubuntu=shimmer-themes, \
+        -- dictionaries-common hddtemp xorg 
+if [ "$RELEASE" = 'manjaro' ]; then
+    install adwaita-manjaro-themes orage icoutils xfce4-volumed-pulse xscreensaver  \
+        xfce4-artwork xfce4-battery-plugin xfce4-clipman-plugin xfce4-dict \
+        xfce4-cpugraph-plugin xfce4-diskperf-plugin xfce4-netload-plugin \
+        xfce4-notifyd xfce4-sensors-plugin xfce4-systemload-plugin \
+        xfce4-weather-plugin xfce4-whiskermenu-plugin \
+        thunar thunar-archive-plugin thunar-media-tags-plugin thunar-volman \
+        manjaro-artwork manjaro-artwork-icons octopi octopi-notifier
+fi
 TIPS="$TIPS
 You can start Xfce via the startxfce4 host command: sudo startxfce4
 "
