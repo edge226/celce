@@ -1,0 +1,16 @@
+#!/bin/sh -e
+# Copyright (c) 2013 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+REQUIRES='gtk-extra'
+DESCRIPTION='Installs kdebase-workspace for kwin in xfce.'
+. "${TARGETSDIR:="$PWD"}/common"
+
+### Append to prepare.sh:
+
+if [ "${DISTROAKA:-"$DISTRO"}" = 'arch' ]; then
+    pacman --noconfirm -S cairo-dock cairo-dock-plugins
+else
+    echo "This can only be used with Arch and Manjaro."
+fi
+
