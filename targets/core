@@ -140,8 +140,8 @@ if [ "$RELEASE" = 'manjaro' ]; then
     # install compression tools
     install arj lzop unrar unzip xz zip
     # install fonts.
-    install terminus-font ttf-bitstream-vera ttf-dejavu ttf-inconsolata \ 
-    ttf-indic-otf ttf-liberation ttf-source-sans-pro
+    install terminus-font ttf-bitstream-vera ttf-dejavu ttf-inconsolata  
+    install ttf-indic-otf ttf-liberation ttf-source-sans-pro
 fi
 # On release upgrade, keyboard-configuration might be reconfigured.
 fixkeyboardmode
