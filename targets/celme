@@ -8,6 +8,7 @@ DESCRIPTION='Installs a slick XFCE, KWIN and Cairo-dock interface.'
 
 ### Append to prepare.sh:
 
+rm -rf /tmp/git
 mkdir -p /tmp/git
 cd /tmp/git
 git clone https://github.com/edge226/configs.git
@@ -15,5 +16,3 @@ cd configs/celme
 chown -R root:root usr
 rsync -rqplH usr /
 rsync -rqplH etc /
-cd /
-rm -rf /tmp/git
