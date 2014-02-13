@@ -1,0 +1,17 @@
+#!/bin/sh -e
+# Copyright (c) 2013 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+REQUIRES='cli-extra xfce kwin cairo-dock'
+DESCRIPTION='Installs a slick XFCE, KWIN and Cairo-dock interface.'
+. "${TARGETSDIR:="$PWD"}/common"
+
+### Append to prepare.sh:
+
+mkdir -p /tmp/git
+cd /tmp/git
+git clone https://github.com/edge226/configs.git
+cd configs/celme
+chown -R root:root usr
+rsync -rqplH usr /
+rsync -rqplH etc /
