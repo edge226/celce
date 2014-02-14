@@ -9,6 +9,7 @@ firefox, geany and meld.'
 
 ### Append to prepare.sh:
 install arch=,gdebi arch=,gksu manjaro=firefox,arch=netsurf,netsurf-gtk manjaro=geany manjaro=meld
+install manjaro=catfish manjaro=vlc manjaro=evince manjaro=clementine manjaro=galculator
 
 if [ "${DISTROAKA:-"$DISTRO"}" = 'debian' ]; then
     # Add netsurf-gtk to Debian-alternatives if not already there
