@@ -132,8 +132,9 @@ if [ "$RELEASE" = 'manjaro' ]; then
     if [ "$ARCH" = 'i686' ]; then
         pacman -S --noconfirm base-devel
     elif [ "$ARCH" = 'x86_64' ]; then
-        pacman -S base-devel
-        pacman -R gcc
+        pacman -R --noconfirm gcc-multilib
+        pacman -S --noconfirm base-devel
+        pacman -R --noconfirm gcc
         yes | pacman -S multilib-devel
     fi
     install git yaourt rsync intel-ucode
