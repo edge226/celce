@@ -132,7 +132,7 @@ if [ "$RELEASE" = 'manjaro' ]; then
     if [ "$ARCH" = 'i686' ]; then
         pacman -S --noconfirm base-devel
     elif [ "$ARCH" = 'x86_64' ]; then
-        pacman -R --noconfirm gcc-multilib
+#        pacman -R --noconfirm gcc-multilib
         pacman -S --noconfirm base-devel
         pacman -R --noconfirm gcc
         yes | pacman -S multilib-devel
