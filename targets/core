@@ -129,13 +129,13 @@ END
     fi
 fi
 if [ "$RELEASE" = 'manjaro' ]; then
-    if [ "$ARCH" = 'i686' ]; then
+#    if [ "$ARCH" = 'i686' ]; then
         pacman -S --noconfirm base-devel
-    elif [ "$ARCH" = 'x86_64' ]; then
-        echo "hits here"
-        install autoconf automake bison file findutils flex gawk gettext grep which
-        install groff gzip m4 make pacman patch pkg-config sed sudo texinfo util-linux
-        yes | pacman -S gcc-multilib lib32-fakeroot
+    if [ "$ARCH" = 'x86_64' ]; then
+#        echo "hits here"
+#        install autoconf automake bison file findutils flex gawk gettext grep which
+#        install groff gzip m4 make pacman patch pkg-config sed sudo texinfo util-linux
+        yes | pacman -S multilib-devel
     fi
     install git yaourt rsync intel-ucode
     # install compression tools
