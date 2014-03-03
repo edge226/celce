@@ -132,8 +132,8 @@ if [ "$RELEASE" = 'manjaro' ]; then
     if [ "$ARCH" = 'i686' ]; then
         pacman -S --noconfirm base-devel
     elif [ "$ARCH" = 'x86_64' ]; then
-        install autoconf automake binutils bison file findutils flex gawk gettext grep which
-        install groff gzip m4 make pacman patch pkg-config sed sudo texinfo util-linux
+        pacman -S base-devel
+        pacman -R gcc
         yes | pacman -S multilib-devel
     fi
     install git yaourt rsync intel-ucode
