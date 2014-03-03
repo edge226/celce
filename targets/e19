@@ -9,9 +9,9 @@ HOSTBIN='starte17 starte19'
 
 ### Append to prepare.sh:
 
-  #Yaourt -S --noconfirm 
+    Yaourt -S --noconfirm efl-git elementary-git enlightenment-git
 
 
 TIPS="$TIPS
-You can start e19 via the starte17 host command: sudo starte17
+You can start e19 via the starte19 host command: sudo starte19
 "
